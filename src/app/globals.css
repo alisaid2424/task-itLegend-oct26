@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --background: 0 0% 100%;
+  --foreground: 202 25% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 202 17% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 202 17% 15%;
+  --primary: 167 47% 49%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 196 24% 96%;
+  --secondary-foreground: 202 17% 15%;
+  --muted: 198 12% 95%;
+  --muted-foreground: 204 8% 38%;
+  --accent: 167 47% 49%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 350 84% 64%;
+  --border: 200 13% 90%;
+  --input: 200 13% 90%;
+  --ring: 167 47% 49%;
+  --radius: 0.5rem;
+  --ink: #0d151c;
+  --line: hsl(var(--border));
+  --mint: hsl(var(--primary));
+  --blue: 228 85% 65%;
+  --coral: hsl(var(--destructive));
+  --exam-blue: #4059c0;
+  --exam-blue-light: #627cff;
+  --exam-answer: #5a76f2;
+  --exam-timer: #ffd400;
+  --exam-timer-foreground: #292b3e;
+  --exam-copy: #323345;
+  --exam-option-copy: #41445a;
+  --exam-shadow: rgba(35, 56, 119, 0.15);
+}
+
+@theme inline {
+  --font-league-spartan: var(--font-league-spartan);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+}
+
+body {
+  font-family: var(--font-league-spartan), sans-serif;
+}
+
+@layer components {
+  .wrapper {
+    @apply mx-auto max-w-7xl;
+    width: min(100% - 48px, 1192px);
+  }
+
+  @media (min-width: 768px) {
+    .wrapper {
+      width: min(100% - 84px, 1192px);
+    }
+  }
+  .main-heading {
+    @apply mb-5 text-lg sm:text-2xl! font-semibold text-foreground md:text-xl;
+  }
+  .course-grid {
+    grid-template-columns: minmax(0, 1.9fr) minmax(320px, 1fr);
+    grid-template-areas: "player curriculum" "actions curriculum" "materials curriculum" "comments curriculum";
+  }
+  .course-grid.is-wide {
+    grid-template-areas: "player player" "actions actions" "materials curriculum" "comments curriculum";
+  }
+  #course-video:fullscreen {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    aspect-ratio: auto;
+    border-radius: 0;
+    background: #050505;
+  }
+  @media (max-width: 900px) {
+    .course-grid,
+    .course-grid.is-wide {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "player" "actions" "materials" "curriculum" "comments";
+    }
+  }
+
+  .loader {
+    width: 45px;
+    aspect-ratio: 0.75;
+    --c: no-repeat linear-gradient(var(--exam-blue) 0 0);
+    background:
+      var(--c) 0% 50%,
+      var(--c) 50% 50%,
+      var(--c) 100% 50%;
+    background-size: 20% 50%;
+    animation: load 1s infinite linear;
+  }
+  @keyframes load {
+    20% {
+      background-position:
+        0% 0%,
+        50% 50%,
+        100% 50%;
+    }
+    40% {
+      background-position:
+        0% 100%,
+        50% 0%,
+        100% 50%;
+    }
+    60% {
+      background-position:
+        0% 50%,
+        50% 100%,
+        100% 0%;
+    }
+    80% {
+      background-position:
+        0% 50%,
+        50% 50%,
+        100% 100%;
+    }
+  }
+}
